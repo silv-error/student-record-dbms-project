@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
 
 const useGetStudents = () => {
   
-  const {data, isLoading, refetch} = useQuery({
+  const {data, refetch} = useQuery({
     queryKey: ["students"],
     queryFn: async () => {
       try {
@@ -21,7 +20,7 @@ const useGetStudents = () => {
     }
   });
 
-  return {data, isLoading, refetch};
+  return {data, refetch};
 }
 
 export default useGetStudents

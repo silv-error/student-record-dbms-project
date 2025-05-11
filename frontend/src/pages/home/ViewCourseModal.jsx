@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import React, { useEffect, useState } from 'react'
 import { formattedTime } from '../utils/date';
 import toast from 'react-hot-toast';
@@ -7,10 +7,11 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import { toTitleFormat } from '../utils/text';
 import useGetStudents from '../../hooks/useGetStudents';
 import EnrolledStudents from './EnrolledStudents';
+import FilteredStudents from './FilteredStudents';
 
 const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationKey: ["enrollStudent"],
     mutationFn: async (email) => {
       try {
@@ -74,7 +75,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
   });
 
   const { data, isLoading, refetch } = useGetEnrolledStudents({ courseId: viewModalData?._id });
-  const { data: getStudents, isLoading: loadingStudents, refetch: refetchStudents } = useGetStudents();
+  const { data: getStudents, refetch: refetchStudents } = useGetStudents();
   useEffect(() => {
     refetch();
     refetchStudents();
@@ -119,7 +120,6 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
       toast.error(error.message);
     }
   });
-
 
   const totalPassing = data?.filter((elem) => elem?.grade > 75);
   const passingRate = parseFloat((totalPassing?.length / data?.length) * 100).toFixed(2);
@@ -171,25 +171,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
               <div className='flex flex-col items-center p-4'>
                 <ul>
                   {term && filteredStudents?.map((student) => (
-                    <li key={student._id} className='flex items-center gap-4 p-2 max-w-2xl'>
-                      <img src={student.profileImg || "https://avatar.iran.liara.run/public/30"} className='size-10 rounded-full object-cover' />
-                      <p className='font-medium'>{toTitleFormat(`${student.firstName} ${student.lastName}`)}</p>
-                      <p className='text-slate-600 mr-10'>{student.email}</p>
-                      <button
-                        onClick={async () => {
-                          await mutateAsync(student.email);
-                          setTerm("");
-                        }}
-                        id="submitAddStudent"
-                        className="px-4 py-2 ml-auto bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm mr-2"
-                      >
-                        {isPending ? (
-                          <div className='flex justify-center items-center gap-2'>
-                            <LoadingSpinner size={20} />
-                          </div>
-                        ) : "Add"}
-                      </button>
-                    </li>
+                    <FilteredStudents key={student._id} student={student} mutateAsync={mutateAsync} setTerm={setTerm} />
                   ))}
                 </ul>
               </div>
@@ -236,7 +218,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
                     await editGrade(editStudentModal?._id);
                     setGrade("")
                   }}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm"
+                  className="px-4 py-2 w-32 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm"
                 >
                   {settingGrade ? (
                     <div className='flex gap-2 justify-center items-center'>
