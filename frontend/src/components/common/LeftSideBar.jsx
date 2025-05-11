@@ -11,7 +11,7 @@ const LeftSideBar = () => {
   const location = useLocation();
 
   return (
-    <div className="bg-[#102E50] flex flex-col justify-start items-center">
+    <div className={`bg-[#102E50] flex flex-col justify-start items-center w-80`}>
       <div className={`${styles.formCotainer} shadow-xl p-6 w-full h-full`}>
         <div className="flex flex-col items-center">
           <img src={authUser?.profileImg || "https://avatar.iran.liara.run/public/30"} sizes={8} alt="Profile Picture" className={`${styles.profilePic} rounded-full mb-4 object-cover`} />

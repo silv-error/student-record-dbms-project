@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { toTitleFormat } from '../utils/text';
 
-const InstructorCourses = ({ item, setSelectedItem, setViewModalData }) => {
+const InstructorCourses = ({ index, item, setSelectedItem, setViewModalData }) => {
 
   const startTime = formattedTime(item.startTime);
   const endTime = formattedTime(item.endTime);
@@ -36,11 +36,11 @@ const InstructorCourses = ({ item, setSelectedItem, setViewModalData }) => {
     onError: (error) => {
       toast.error(error.message);
     }
-  })
+  });
 
   return (
     <>
-      <tr>
+      <tr className={`${index%2==1 ? "bg-gray-100" : ""}`}>
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.code.toUpperCase()}</td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{toTitleFormat(item.title)}</td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.units}</td>

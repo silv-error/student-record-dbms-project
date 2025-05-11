@@ -254,9 +254,9 @@ const InstructorCoursesScreen = () => {
                   <th scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Day
                   </th>
-                  <th scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start
-                    Time</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Start Time
+                  </th>
                   <th scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End
                     Time</th>
@@ -266,9 +266,10 @@ const InstructorCoursesScreen = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredCourses?.map((item) => (
+                {filteredCourses?.map((item, index) => (
                   <InstructorCourses
                     key={item._id}
+                    index={index}
                     item={item}
                     setSelectedItem={setSelectedItem}
                     setViewModalData={setViewModalData}
