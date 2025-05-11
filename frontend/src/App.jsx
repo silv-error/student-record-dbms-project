@@ -27,7 +27,7 @@ function App() {
           </header>
         )}
         {/* Main content */}
-        <div className={`${authUser && "flex flex-grow w-full flex-col md:flex-row m-0 p-0"}`}>
+        <div className={`${authUser && "flex flex-grow w-full flex-col md:flex-row"}`}>
           {authUser && <LeftSideBar />}
           <Routes>
             <Route path="/" element={authUser ? <HomePage /> : <Navigate to={"/login"} />} />

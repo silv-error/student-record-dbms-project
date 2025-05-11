@@ -84,7 +84,7 @@ const ProfilePage = () => {
       }
     }
   });
-  
+
   useEffect(() => {
     refetch();
   }, [id, refetch])
@@ -94,8 +94,10 @@ const ProfilePage = () => {
 
   if (isLoading || isRefetching) {
     return (
-      <div className='relative inset-0 h-full flex justify-center items-center'>
-        <LoadingSpinner size={50} />
+      <div className='relative w-full inset-0'>
+        <div className='relative left-1/2 top-1/2 -translate-y-1/2 text-white'>
+          <LoadingSpinner size={50}/>
+        </div>
       </div>
     )
   }

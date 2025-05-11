@@ -1,6 +1,7 @@
 import { Trash } from 'lucide-react'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const EnrolledStudents = ({ student, setEditStudentModal, unenrollStudent, pendingUnenrollStudent }) => {
 
@@ -16,6 +17,13 @@ const EnrolledStudents = ({ student, setEditStudentModal, unenrollStudent, pendi
     status = "On going";
     statusTheme = "bg-gray-100 text-gray-800"
   }
+
+  const [loadingStudentId, setLoadingStudentId] = useState(null);
+  const handleUnenroll = async (studentId) => {
+    setLoadingStudentId(studentId); 
+    await unenrollStudent(studentId);
+    setLoadingStudentId(null);
+  };
 
   return (
     <tr>
@@ -46,11 +54,11 @@ const EnrolledStudents = ({ student, setEditStudentModal, unenrollStudent, pendi
             Edit
           </button>
           <button
-            onClick={() => unenrollStudent(student?.student?._id)}
+            onClick={() => handleUnenroll(student?.student?._id)}
             className="px-3 py-1 rounded transition delete-btn"
             data-student-id="2023-001"
           >
-            {pendingUnenrollStudent ? (
+            {loadingStudentId === student?.student?._id ? (
               <div className='flex justify-center items-center'>
                 <LoadingSpinner size={20} />
               </div>
