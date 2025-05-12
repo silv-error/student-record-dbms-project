@@ -165,7 +165,7 @@ const ProfilePage = () => {
                       onClick={handleSubmit}
                       className=" bg-blue-600 hover:bg-blue-700 w-40 text-white font-medium py-2 px-6 rounded-lg"
                     >
-                      {(isPending && authUser) ? (
+                      {(isPending && authUser && myProfile) ? (
                         <>
                           <div className='flex justify-center items-center gap-2'>
                             <LoadingSpinner size={20} /> {`Loading`}
