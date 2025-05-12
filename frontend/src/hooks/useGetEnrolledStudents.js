@@ -4,7 +4,6 @@ const useGetEnrolledStudents = ({ courseId }) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["enrolledStudents"],
     queryFn: async () => {
-      if(!courseId) return [];
       try {
         const res = await fetch(`/api/courses/${courseId}/enrolled`);
         const data = await res.json();

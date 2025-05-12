@@ -249,7 +249,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200" id="studentTableBody">
-                  {data?.map((student) => (
+                  {!isLoading && data?.map((student) => (
                     <EnrolledStudents
                       key={student.student._id}
                       student={student}
@@ -260,7 +260,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
                   ))}
                   {isLoading && (
                     <tr>
-                      <td colSpan={5}>
+                      <td colSpan={7}>
                         <p className='flex gap-2 justify-center items-center p-4'>
                           <LoadingSpinner size={20} /> Loading...
                         </p>
