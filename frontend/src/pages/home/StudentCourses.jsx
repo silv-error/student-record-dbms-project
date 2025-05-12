@@ -1,7 +1,7 @@
 import { formattedTime } from '../utils/date'
 import { toTitleFormat } from '../utils/text';
 
-const StudentCourses = ({ item, setViewModalData }) => {
+const StudentCourses = ({ item, setViewModalData, index }) => {
 
   const startTime = formattedTime(item.startTime);
   const endTime = formattedTime(item.endTime);
@@ -18,7 +18,7 @@ const StudentCourses = ({ item, setViewModalData }) => {
   }
 
   return (
-    <tr>
+    <tr className={`${index%2==1 ? "bg-gray-100 bg-opacity-55" : ""}`}>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.code.toUpperCase()}</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{toTitleFormat(item.title)}</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.units}</td>

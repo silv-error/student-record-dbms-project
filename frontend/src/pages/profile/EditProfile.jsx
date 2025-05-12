@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAuthContext } from '../../context/authContext'
 
-const EditProfile = ({ formData, setFormData, handleSubmit, handleOnChange}) => {
+const EditProfile = ({ formData, setFormData, handleOnChange}) => {
 
   const {authUser} = useAuthContext();
   useEffect(() => {

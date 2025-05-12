@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import StudentCourses from "./StudentCourses"
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { formatPostDate } from '../utils/date';
+import { formatPostDate, formattedTime } from '../utils/date';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { toTitleFormat } from '../utils/text';
 const StudentCoursesScreen = () => {
 
   const { data, isLoading } = useQuery({
@@ -84,10 +85,10 @@ const StudentCoursesScreen = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredCourses?.map((item) => (
-                  <StudentCourses key={item._id} item={item} setViewModalData={setViewModalData} />
+                {filteredCourses?.map((item, index) => (
+                  <StudentCourses key={item._id} item={item} index={index} setViewModalData={setViewModalData} />
                 ))}
-                {!data?.length && (
+                {(!data?.length && !isLoading) && (
                   <tr>
                     <td colSpan={10} className='text-center font-medium text-gray-700 p-10'>
                       Oops! No subjects are available right now.
@@ -98,6 +99,13 @@ const StudentCoursesScreen = () => {
                   <tr>
                     <td colSpan={10} className='text-center font-medium text-gray-700 p-10'>
                       No subjects in this semester.
+                    </td>
+                  </tr>
+                )}
+                {isLoading && (
+                  <tr>
+                    <td colSpan={10} className='p-4'>
+                      <p className='flex justify-center gap-2 items-center'><LoadingSpinner size={20}/> Loading...</p>
                     </td>
                   </tr>
                 )}
@@ -122,8 +130,9 @@ const StudentCoursesScreen = () => {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-4/12">Student ID</th>
-                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-4/12">Student Name</th>
+                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Student ID</th>
+                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Student Name</th>
+                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Email</th>
                       <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Joined Since</th>
                       <th scope="col" className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Action</th>
                     </tr>
@@ -133,7 +142,8 @@ const StudentCoursesScreen = () => {
                       <tr key={classmate._id}>
                         <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{classmate?.student._id} </td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{classmate?.student.firstName} {classmate?.student.middleName} {classmate?.student.lastName}</td>
-                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{formatPostDate(classmate?.student?.createdAt)} ago</td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{classmate?.student.email}</td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{formatPostDate(classmate?.joinedAt)} ago</td>
                         <td className="px-4 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                           <div className="flex justify-center space-x-2">
                             <Link
@@ -168,19 +178,19 @@ const StudentCoursesScreen = () => {
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="text-sm font-medium text-gray-500 mb-2">Course Information</h4>
                   <div className="space-y-1">
-                    <p className="text-sm"><span className="font-medium">Code:</span> CS 101</p>
-                    <p className="text-sm"><span className="font-medium">Title:</span> Introduction to Programming</p>
-                    <p className="text-sm"><span className="font-medium">Units:</span> 4</p>
-                    <p className="text-sm"><span className="font-medium">Schedule:</span> Mon/Wed/Fri, 9:00 AM - 10:30 AM</p>
-                    <p className="text-sm"><span className="font-medium">Room:</span> CS Building 205</p>
+                    <p className="text-sm"><span className="font-medium">Code:</span> {viewModalData?.code.toUpperCase()}</p>
+                    <p className="text-sm"><span className="font-medium">Title:</span> {toTitleFormat(viewModalData?.title)}</p>
+                    <p className="text-sm"><span className="font-medium">Units:</span> {viewModalData?.units}</p>
+                    <p className="text-sm"><span className="font-medium">Schedule:
+                      </span> {viewModalData?.day}, {formattedTime(viewModalData?.startTime)} - {formattedTime(viewModalData?.endTime)}
+                    </p>
+                    <p className="text-sm"><span className="font-medium">Room:</span> {viewModalData?.room.toUpperCase()}</p>
                   </div>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="text-sm font-medium text-gray-500 mb-2">Name Statistics</h4>
+                  <h4 className="text-sm font-medium text-gray-500 mb-2">Student Summary</h4>
                   <div className="space-y-1">
                     <p className="text-sm"><span className="font-medium">Total Students: </span>{getClassmates?.length} </p>
-                    <p className="text-sm"><span className="font-medium">Passing Rate:</span> 50%</p>
-                    <p className="text-sm"><span className="font-medium">Average Grade:</span> 75</p>
                   </div>
                 </div>
               </div>

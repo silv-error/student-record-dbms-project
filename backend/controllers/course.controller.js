@@ -147,7 +147,7 @@ export const enrollStudent = async (req, res) => {
     }
     
     let course = await Course.findByIdAndUpdate(id, { $push: {
-      students: { student: student._id },
+      students: { student: student._id, joinedAt: new Date() },
     }}, { new: true }).populate({ path: "students.student", select: "-password"});
     if(!course) {
       return res.status(404).json({ success: false, error: "Course not found" });
