@@ -126,7 +126,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
     }
   });
 
-  const totalPassing = data?.filter((elem) => elem?.grade > 75);
+  const totalPassing = data?.filter((elem) => elem?.grade >= 75);
   const passingRate = parseFloat((totalPassing?.length / data?.length) * 100).toFixed(2);
 
   return (

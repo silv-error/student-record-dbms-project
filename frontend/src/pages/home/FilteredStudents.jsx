@@ -4,8 +4,6 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 
 const FilteredStudents = ({ student, mutateAsync, setTerm, studentId, setStudentId }) => {
 
-  console.log(studentId);
-  console.log(student?._id)
   const handleIsLoading = async (id) => {
     setStudentId(id);
     try {

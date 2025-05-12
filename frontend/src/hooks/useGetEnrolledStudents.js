@@ -8,7 +8,6 @@ const useGetEnrolledStudents = ({ courseId }) => {
         const res = await fetch(`/api/courses/${courseId}/enrolled`);
         const data = await res.json();
 
-
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
         }

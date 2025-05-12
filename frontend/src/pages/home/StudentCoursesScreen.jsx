@@ -123,7 +123,7 @@ const StudentCoursesScreen = () => {
           <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-6xl sm:w-full">
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="flex justify-between items-start">
-                <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Course Details - Introduction to Programming (CS 101)</h3>
+                <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Course Details - {viewModalData?.title} ({viewModalData?.code})</h3>
               </div>
 
               <div className="overflow-x-auto">
