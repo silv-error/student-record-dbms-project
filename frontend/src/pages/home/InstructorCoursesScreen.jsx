@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Plus } from 'lucide-react';
 import ViewCourseModal from './ViewCourseModal';
+import { formattedTime1 } from '../utils/date';
 
 const InstructorCoursesScreen = () => {
 
@@ -113,8 +114,8 @@ const InstructorCoursesScreen = () => {
       semester: selectedItem?.semester,
       room: selectedItem?.room,
       day: selectedItem?.day,
-      startTime: selectedItem?.startTime,
-      endTime: selectedItem?.endTime,
+      startTime: formattedTime1(selectedItem?.startTime),
+      endTime: formattedTime1(selectedItem?.endTime),
     })
   }, [selectedItem]);
 
@@ -210,6 +211,8 @@ const InstructorCoursesScreen = () => {
       </div>
     )
   }
+
+  console.log(formData);
 
   return (
     <div id="coursesContent" className="hidden-section w-full p-4 md:p-6">

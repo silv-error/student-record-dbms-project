@@ -31,10 +31,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  yearLevel: {
-    type: String,
-    default: "",
-  },
   role: {
     type: String,
     enum: ["Student", "Instructor"],

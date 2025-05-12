@@ -242,6 +242,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">Student ID</th>
                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Student Name</th>
                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Email</th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">Joined Since</th>
                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">Grade</th>
                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">Status</th>
                     <th scope="col" className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">Action</th>
@@ -285,7 +286,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
                 </div>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="text-sm font-medium text-gray-500 mb-2">Name Statistics</h4>
+                <h4 className="text-sm font-medium text-gray-500 mb-2">Student Statistics</h4>
                 <div className="space-y-1">
                   <p className="text-sm"><span className="font-medium">Total Students:</span> {data?.length} </p>
                   <p className="text-sm"><span className="font-medium">Passing Rate:</span> {passingRate === "NaN" ? "0" : passingRate}%</p>

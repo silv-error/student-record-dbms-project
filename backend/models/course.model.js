@@ -54,6 +54,10 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         default: null,
       },
+      joinedAt: {
+        type: Date,
+        default: Date.now,
+      }
     }
   ],
 }, { timestamps: true });
