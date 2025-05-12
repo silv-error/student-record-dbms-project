@@ -76,6 +76,8 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
 
   const { data, isLoading, refetch } = useGetEnrolledStudents({ courseId: viewModalData?._id });
   const { data: getStudents, refetch: refetchStudents } = useGetStudents();
+
+  
   useEffect(() => {
     refetch();
     refetchStudents();

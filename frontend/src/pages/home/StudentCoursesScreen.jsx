@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import StudentCourses from "./StudentCourses"
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { formatPostDate, formattedTime } from '../utils/date';
+import { formatPostDate, formattedBirthDate, formattedTime } from '../utils/date';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { toTitleFormat } from '../utils/text';
 const StudentCoursesScreen = () => {
@@ -143,7 +143,7 @@ const StudentCoursesScreen = () => {
                         <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{classmate?.student._id} </td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{classmate?.student.firstName} {classmate?.student.middleName} {classmate?.student.lastName}</td>
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{classmate?.student.email}</td>
-                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{formatPostDate(classmate?.joinedAt)} ago</td>
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{formattedBirthDate(classmate?.joinedAt)}</td>
                         <td className="px-4 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                           <div className="flex justify-center space-x-2">
                             <Link

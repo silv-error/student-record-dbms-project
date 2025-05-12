@@ -36,9 +36,7 @@ export const deleteCourse = async (req, res) => {
 export const getEnrolledStudents = async (req, res) => {
   try {
     const { id } = req.params;
-    if(!id) {
-      return res.status(200).json([]);
-    }
+
     const course = await Course.findById(id).populate({
       path: "students.student", select: "-password"
     }).lean();
