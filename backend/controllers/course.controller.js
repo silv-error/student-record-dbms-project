@@ -141,7 +141,7 @@ export const enrollStudent = async (req, res) => {
     }});
     
     if(enrolledStudent) {
-      return res.status(404).json({ success: false, error: "Student is already enrolled" });
+      return res.status(400).json({ success: false, error: "Student is already enrolled in this course" });
     }
     
     let course = await Course.findByIdAndUpdate(id, { $push: {
