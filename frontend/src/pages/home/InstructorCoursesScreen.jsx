@@ -212,8 +212,6 @@ const InstructorCoursesScreen = () => {
     )
   }
 
-  console.log(formData);
-
   return (
     <div id="coursesContent" className="hidden-section w-full p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
