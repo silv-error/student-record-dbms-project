@@ -18,7 +18,7 @@ const FilteredStudents = ({ student, mutateAsync, setTerm, studentId, setStudent
 
   return (
     <li className='flex items-center gap-4 p-2 max-w-2xl'>
-      <img src={student?.profileImg || "https://avatar.iran.liara.run/public/30"} className='size-10 rounded-full object-cover' />
+      <img src={student?.profileImg || "https://avatar.iran.liara.run/public/boy"} className='size-10 rounded-full object-cover' />
       <p className='font-medium'>{toTitleFormat(`${student?.firstName} ${student?.lastName}`)}</p>
       <p className='text-slate-600 mr-10'>{student?.email}</p>
       <button

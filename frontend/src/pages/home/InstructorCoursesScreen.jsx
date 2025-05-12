@@ -42,7 +42,7 @@ const InstructorCoursesScreen = () => {
     endTime: "",
   });
 
-  const { mutateAsync: editCourse, isLoading: editingCourse } = useMutation({
+  const { mutateAsync: editCourse, isPending: editingCourse } = useMutation({
     mutationKey: ["editCourse"],
     mutationFn: async () => {
       try {
@@ -182,8 +182,10 @@ const InstructorCoursesScreen = () => {
       startTime: startTime.toISOString(),
       endTime: endTime.toISOString(),
     });
-    await createCourse();
-    await refetch();
+    Promise.all([
+      await createCourse(),
+      await refetch(),
+    ]);
     setCourseData({
       code: "",
       title: "",
