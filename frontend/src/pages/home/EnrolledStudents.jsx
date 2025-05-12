@@ -2,7 +2,7 @@ import { Trash } from 'lucide-react'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { formatPostDate } from '../utils/date';
+import { formatPostDate, formattedBirthDate, formattedTime } from '../utils/date';
 
 const EnrolledStudents = ({ student, setEditStudentModal, unenrollStudent, pendingUnenrollStudent }) => {
 
@@ -31,7 +31,7 @@ const EnrolledStudents = ({ student, setEditStudentModal, unenrollStudent, pendi
       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{student?.student?._id}</td>
       <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{student?.student?.firstName} {student?.student?.middleName} {student?.student?.lastName}</td>
       <td className={`px-4 py-4 whitespace-nowrap text-sm text-gray-500`}>{student?.student?.email}</td>
-      <td className={`px-4 py-4 whitespace-nowrap text-sm text-gray-500`}>{formatPostDate(student?.joinedAt)} ago</td>
+      <td className={`px-4 py-4 whitespace-nowrap text-sm text-gray-500`}>{formattedBirthDate(student?.joinedAt)}</td>
       <td className={`px-4 py-4 whitespace-nowrap text-sm text-gray-500`}>{student?.grade ? student?.grade : "In Progress"}</td>
       <td className="px-4 py-4 whitespace-nowrap">
         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusTheme}`}>
