@@ -24,13 +24,13 @@ const InstructorCourses = ({ index, item, setSelectedItem, setViewModalData }) =
           throw new Error(data.error || "Something went wrong");
         }
 
-        queryClient.invalidateQueries({ queryKey: ["instructorCourses"]});
         return data;
       } catch (error) {
         throw new Error(error);
       }
     },
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["instructorCourses"]});
       toast.success(data.message);
     },
     onError: (error) => {

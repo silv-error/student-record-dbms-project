@@ -120,7 +120,7 @@ const ProfilePage = () => {
                   />
                 )}
                 <img
-                  src={profileImg || profile?.profileImg || "https://avatar.iran.liara.run/public/30"}
+                  src={profileImg || profile?.profileImg || "https://avatar.iran.liara.run/public/boy"}
                   alt="Profile Picture"
                   className={`border-4 border-white ${styles.profilePicc} rounded-full object-cover size-40 bg-gray-900`}
                 />
