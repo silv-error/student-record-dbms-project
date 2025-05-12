@@ -11,6 +11,7 @@ import FilteredStudents from './FilteredStudents';
 
 const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
 
+  const [studentId, setStudentId] = useState(null);
   const { mutateAsync } = useMutation({
     mutationKey: ["enrollStudent"],
     mutationFn: async (email) => {
@@ -33,6 +34,8 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
         throw new Error(error);
       } finally {
         refetch();
+        // setTerm("");
+        setStudentId(null);
       }
     },
     onSuccess: (data) => {
@@ -173,7 +176,7 @@ const ViewCourseModal = ({ viewModalData, setViewModalData }) => {
               <div className='flex flex-col items-center p-4'>
                 <ul>
                   {term && filteredStudents?.map((student) => (
-                    <FilteredStudents key={student._id} student={student} mutateAsync={mutateAsync} setTerm={setTerm} />
+                    <FilteredStudents key={student._id} student={student} mutateAsync={mutateAsync} setTerm={setTerm} studentId={studentId} setStudentId={setStudentId} />
                   ))}
                 </ul>
               </div>
